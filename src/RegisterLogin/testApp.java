@@ -4,6 +4,7 @@ import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -27,7 +28,9 @@ public class testApp extends JFrame {
 	public static JFrame introForm = new JFrame("Login/Register");
 	public static JFrame registerForm = new JFrame("Register");
 	public static JFrame userForm = new JFrame("Info");
-
+   private int id;
+   private int role;
+   static Korisnik loged;
 	static void initForm() {
 		introForm.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	
@@ -70,7 +73,18 @@ public class testApp extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				// TODO Auto-generated method stub
-				
+				KorisnikDaoImpl test=new KorisnikDaoImpl();
+				try {
+					if(test.isExist(username.getText(), password.getText()))
+					{
+						introForm.setVisible(false);
+						userForm.setVisible(true);
+						loged=test.getKorisnik(username.getText(), password.getText());
+					}
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
 			
 			

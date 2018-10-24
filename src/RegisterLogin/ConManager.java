@@ -10,9 +10,9 @@ public class ConManager {
 
 		// vrijednosti koje smo izabrali prilikom instalacije MySQL Servera
 		private static final String USERNAME = "root";
-		private static final String PASSWORD = "toor";
+		private static final String PASSWORD = "";
 		// localhost//imeBazeNaKojuSeSpajamo
-		private static final String CONN_STRING = "jdbc:mysql://localhost/registerInfo?useSSL=false&serverTimezone=UTC";
+		private static final String CONN_STRING = "jdbc:mysql://localhost/registerinfo?useSSL=false&useLegacyTimedateCode=false&serverTimezone=UTC";
 
 		// connection object
 		private Connection connection = null;
@@ -33,6 +33,7 @@ public class ConManager {
 		private boolean openConnection() {
 			try {
 				connection = DriverManager.getConnection(CONN_STRING, USERNAME, PASSWORD);
+				System.out.println("Yeeeeeeeees");
 				return true;
 			} catch (SQLException e) {
 				System.err.println(e);

@@ -18,7 +18,7 @@ public class Korisnik {
 		ID = iD;
 	}
 
-	public Korisnik(String userName, String password, String email, String dob, String gender, String country, int role) {
+	public Korisnik(int id,String userName, String password, String email, String dob, String gender, String country, int role) {
 		super();
 		this.userName = userName;
 		this.password = password;

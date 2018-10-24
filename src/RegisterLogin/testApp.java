@@ -2,7 +2,8 @@ package RegisterLogin;
 
 import java.awt.Container;
 import java.awt.Dimension;
-
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -64,6 +65,25 @@ public class testApp extends JFrame {
 		sL.putConstraint(SpringLayout.WEST, logIn, 125, SpringLayout.NORTH, panel);
 		sL.putConstraint(SpringLayout.NORTH, register, 300, SpringLayout.WEST, panel);
 		sL.putConstraint(SpringLayout.WEST, register, 125, SpringLayout.NORTH, panel);
+		logIn.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			
+		});
+		register.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+		});
 		introForm.pack();
 		introForm.setVisible(true);
 	}

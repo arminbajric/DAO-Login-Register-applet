@@ -43,7 +43,7 @@ public class ConManager {
 		public Connection getConnection() {
 			if (connection == null) {
 				if (openConnection()) {
-					System.out.println("Konekcija otvorena.");
+					
 					return connection;
 				} else {
 					return null;
@@ -53,7 +53,7 @@ public class ConManager {
 		}
 
 		public void close() {
-			System.out.println("Konekcija zatvorena.");
+			
 			try {
 				connection.close();
 				connection = null;

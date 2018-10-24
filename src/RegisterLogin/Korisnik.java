@@ -5,11 +5,11 @@ public class Korisnik {
 	private String password;
 	private String email;
 	private String dob;
-	private char gender;
+	private String gender;
 	private String country;
 	private int role;
 
-	public Korisnik(String userName, String password, String email, String dob, char gender, String country, int role) {
+	public Korisnik(String userName, String password, String email, String dob, String gender, String country, int role) {
 		super();
 		this.userName = userName;
 		this.password = password;
@@ -36,7 +36,7 @@ public class Korisnik {
 		return dob;
 	}
 
-	public char getGender() {
+	public String getGender() {
 		return gender;
 	}
 

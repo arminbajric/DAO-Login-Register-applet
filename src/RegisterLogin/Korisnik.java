@@ -8,6 +8,15 @@ public class Korisnik {
 	private String gender;
 	private String country;
 	private int role;
+	private int ID;
+
+	public int getID() {
+		return ID;
+	}
+
+	public void setID(int iD) {
+		ID = iD;
+	}
 
 	public Korisnik(String userName, String password, String email, String dob, String gender, String country, int role) {
 		super();

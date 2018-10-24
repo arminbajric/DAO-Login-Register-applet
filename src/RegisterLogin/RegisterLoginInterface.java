@@ -9,5 +9,7 @@ public interface RegisterLoginInterface {
 
 	public void deleteKorisnik(Korisnik student) throws SQLException;
 	
-	public void addKorisnik() throws SQLException;
+	
+
+	void addKorisnik(Korisnik user) throws SQLException;
 }

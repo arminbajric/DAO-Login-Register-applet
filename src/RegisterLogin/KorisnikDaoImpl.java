@@ -17,6 +17,7 @@ public class KorisnikDaoImpl implements RegisterLoginInterface{
 		try (
 			PreparedStatement statement=con.prepareStatement(upit);)
 				{
+			
 					statement.setInt(1, userID);
 					rs=statement.executeQuery();
 					user = new Korisnik( rs.getString("userName"), rs.getString("password"), rs.getString("email"),
@@ -27,21 +28,69 @@ public class KorisnikDaoImpl implements RegisterLoginInterface{
 	}
 
 	@Override
-	public void updateKorisnik(Korisnik student) throws SQLException {
+	public void updateKorisnik(Korisnik user) throws SQLException {
 		// TODO Auto-generated method stub
+		Connection con = ConManager.getInstance().getConnection();
 		
+		String upit="UPDATE info SET userName=?,password=?,email=?,dob=?,gender=?,country=? WHERE id=?";
+		
+		try (
+			PreparedStatement statement=con.prepareStatement(upit);)
+				{
+			statement.setString(1, user.getUserName());
+			statement.setString(2,user.getPassword());
+			statement.setString(3, user.getEmail());
+			statement.setString(4, user.getDob());
+			statement.setString(5, user.getGender());
+			statement.setString(6, user.getCountry());
+			statement.setInt(7, user.getID());
+					
+				
+					statement.executeUpdate();
+				}
 	}
 
 	@Override
-	public void deleteKorisnik(Korisnik student) throws SQLException {
+	public void deleteKorisnik(Korisnik user) throws SQLException {
 		// TODO Auto-generated method stub
+Connection con = ConManager.getInstance().getConnection();
 		
+		String upit="DELETE * FROM info WHERE id=?";
+		
+		try (
+			PreparedStatement statement=con.prepareStatement(upit);)
+				{
+			
+			statement.setInt(7, user.getID());
+					
+				
+					statement.executeUpdate();
+				}
 	}
 
 	@Override
-	public void addKorisnik() throws SQLException {
+	public void addKorisnik(Korisnik user) throws SQLException {
 		// TODO Auto-generated method stub
+Connection con = ConManager.getInstance().getConnection();
 		
+		String upit="INSERT INTO info(userName,password,email,dob,gender,country) VALUES (?,?,?,?,?,?"  ;
+		
+		try (
+			PreparedStatement statement=con.prepareStatement(upit);)
+				{
+			statement.setString(1, user.getUserName());
+			statement.setString(2,user.getPassword());
+			statement.setString(3, user.getEmail());
+			statement.setString(4, user.getDob());
+			statement.setString(5, user.getGender());
+			statement.setString(6, user.getCountry());
+			
+					
+				
+					statement.executeUpdate();
+				}
 	}
+
+	
 
 }

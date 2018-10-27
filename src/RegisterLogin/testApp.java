@@ -46,11 +46,11 @@ public class testApp extends JFrame {
 
 	static void userForm() throws SQLException {
 		userForm = new JFrame();
-		ResultSet rs = null;
+		
 		Container panel = userForm.getContentPane();
 		SpringLayout sL = new SpringLayout();
 		panel.setLayout(sL);
-		t = new JTable((TableModel) rs);
+		
 		KorisnikDaoImpl test = new KorisnikDaoImpl();
 		
 		t = test.getTable(loged);

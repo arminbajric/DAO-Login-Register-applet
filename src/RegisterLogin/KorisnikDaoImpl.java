@@ -129,14 +129,10 @@ public JTable getTable(int userID) throws SQLException
 	Connection con = ConManager.getInstance().getConnection();
 	String query="SELECT ime,prezime,grad,email,dob FROM imeniklist WHERE 'info.id'=?";
 	ResultSet rs=null;
-	DefaultTableModel model=new DefaultTableModel();
-	Vector temp = new Vector();
-	temp.add("Ime");
-	temp.add("Prezime");
-	temp.add("Grad");
-	temp.add("Email");
-	temp.add("Datum rodjenja");
-	model.addRow(temp);
+	
+	Object[] temp = new Object[] {"Ime","Prezime","Grad","Email","DOB"};
+	DefaultTableModel model=new DefaultTableModel(null,temp);
+	
 	JTable t;
 	try (PreparedStatement statement = con.prepareStatement(query);) {
 
@@ -146,15 +142,12 @@ public JTable getTable(int userID) throws SQLException
 		while(rs.next())
 		{
 			
-			temp=new Vector();
-			temp.add(rs.getString("ime"));
-			temp.add(rs.getString("prezime"));
-			temp.add(rs.getString("grad"));
-			temp.add(rs.getString("email"));
-			temp.add(rs.getString("dob"));
+			 temp= new Object[] {rs.getString("ime"),rs.getString("prezime"),rs.getString("grad"),rs.getString("email"),rs.getString("dob")};
 			model.addRow(temp);
 		}
-		 t = new JTable(model);
+		
+		 t = new JTable();
+		 t.setModel(model);
 	
 	}
 	return t;

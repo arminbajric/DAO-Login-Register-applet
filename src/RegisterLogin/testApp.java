@@ -46,7 +46,10 @@ public class testApp extends JFrame {
 
 	static void userForm() throws SQLException {
 		userForm = new JFrame();
-		
+        userForm.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        userForm.setResizable(false);
+		userForm.setPreferredSize(new Dimension(500, 500));
+		userForm.setMinimumSize(new Dimension(300, 300));
 		Container panel = userForm.getContentPane();
 		SpringLayout sL = new SpringLayout();
 		panel.setLayout(sL);
@@ -56,13 +59,101 @@ public class testApp extends JFrame {
 		t = test.getTable(loged);
 		JScrollPane pane = new JScrollPane(t);
 		pane.setPreferredSize(new Dimension(300, 200));
-		t.setPreferredSize(new Dimension(300, 250));
+		t.setPreferredSize(new Dimension(300, 400));
 		panel.add(pane);
-
-		userForm.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		sL.putConstraint(SpringLayout.NORTH, pane, 20, SpringLayout.WEST, panel);
+		sL.putConstraint(SpringLayout.WEST, pane, 100, SpringLayout.NORTH, panel);
+	    JButton prethodni,sledeci,izbrisati,novi,update,ok;
+		JTextField ime,prezime,grad,email,dob;
+		JLabel imeL,prezimeL,gradL,emailL,dobL;
+		Dimension dim = new Dimension(90, 30);
+		prethodni=new JButton("Nazad");
+		prethodni.setPreferredSize(dim);
+		sledeci=new JButton("Naprijed");
+		sledeci.setPreferredSize(dim);
+		izbrisati=new JButton("Izbriši");
+		izbrisati.setPreferredSize(dim);
+		novi=new JButton("Novi");
+		novi.setPreferredSize(dim);
+		update=new JButton("Izmjeni");
+		update.setPreferredSize(dim);
+		ok=new JButton("Potvrdi");
+		ok.setPreferredSize(dim);
+		panel.add(prethodni);
+		panel.add(sledeci);
+		panel.add(izbrisati);
+		panel.add(novi);
+		panel.add(update);
+		panel.add(ok);
+		ok.setVisible(false);
+		sL.putConstraint(SpringLayout.NORTH, prethodni, 420, SpringLayout.WEST, panel);
+		sL.putConstraint(SpringLayout.WEST, prethodni, 5, SpringLayout.NORTH, panel);
+		
+		sL.putConstraint(SpringLayout.NORTH, novi, 420, SpringLayout.WEST, panel);
+		sL.putConstraint(SpringLayout.WEST, novi, 105, SpringLayout.NORTH, panel);
+		sL.putConstraint(SpringLayout.NORTH, izbrisati, 420, SpringLayout.WEST, panel);
+		sL.putConstraint(SpringLayout.WEST,izbrisati, 205, SpringLayout.NORTH, panel);
+		sL.putConstraint(SpringLayout.NORTH, update, 420, SpringLayout.WEST, panel);
+		sL.putConstraint(SpringLayout.WEST, update, 305, SpringLayout.NORTH, panel);
+		sL.putConstraint(SpringLayout.NORTH, sledeci, 420, SpringLayout.WEST, panel);
+		sL.putConstraint(SpringLayout.WEST,sledeci, 405, SpringLayout.NORTH, panel);
+		
 		userForm.pack();
-		userForm.setMinimumSize(new Dimension(300, 300));
 		userForm.setVisible(true);
+		prethodni.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+		});
+		sledeci.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+		});
+		izbrisati.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+		});
+		novi.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+		});
+		update.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+		});
+		ok.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+		});
 	}
 
 	static void initForm() {

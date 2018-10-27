@@ -28,6 +28,10 @@ public class Korisnik {
 		this.country = country;
 		this.role = role;
 	}
+	public Korisnik(int userID)
+	{
+		this.ID=userID;
+	}
 
 	public String getUserName() {
 		return userName;

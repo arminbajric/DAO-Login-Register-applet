@@ -1,16 +1,25 @@
 package RegisterLogin;
 
+import java.awt.BorderLayout;
+import java.awt.Component;
 import java.awt.Container;
 import java.awt.Dimension;
+import java.awt.GridLayout;
+import java.awt.Label;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.ResultSet;
 import java.sql.SQLException;
-
+import javax.swing.JTabbedPane;
+import javax.swing.JTable;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import javax.swing.SpringLayout;
+import javax.swing.table.TableModel;
 
 public class testApp extends JFrame {
 
@@ -28,12 +37,37 @@ public class testApp extends JFrame {
 	public static JFrame introForm = new JFrame("Login/Register");
 	public static JFrame registerForm = new JFrame("Register");
 	public static JFrame userForm = new JFrame("Info");
-   private int id;
-   private int role;
-   static Korisnik loged;
+	static JTable t;
+	static TableModel tm;
+	private int id;
+	private int role;
+	static int loged;
+	int userID;
+
+	static void userForm() throws SQLException {
+		userForm = new JFrame();
+		ResultSet rs = null;
+		Container panel = userForm.getContentPane();
+		SpringLayout sL = new SpringLayout();
+		panel.setLayout(sL);
+		t = new JTable((TableModel) rs);
+		KorisnikDaoImpl test = new KorisnikDaoImpl();
+		
+		t = test.getTable(loged);
+		JScrollPane pane = new JScrollPane(t);
+		pane.setPreferredSize(new Dimension(300, 200));
+		t.setPreferredSize(new Dimension(300, 250));
+		panel.add(pane);
+
+		userForm.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		userForm.pack();
+		userForm.setMinimumSize(new Dimension(300, 300));
+		userForm.setVisible(true);
+	}
+
 	static void initForm() {
 		introForm.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-	
+
 		introForm.setResizable(false);
 		introForm.setPreferredSize(new Dimension(500, 500));
 		Container panel = introForm.getContentPane();
@@ -73,30 +107,28 @@ public class testApp extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				// TODO Auto-generated method stub
-				KorisnikDaoImpl test=new KorisnikDaoImpl();
+				KorisnikDaoImpl test = new KorisnikDaoImpl();
 				try {
-					if(test.isExist(username.getText(), password.getText()))
-					{
+					if (test.isExist(username.getText(), password.getText())) {
 						introForm.setVisible(false);
-						userForm.setVisible(true);
-						loged=test.getKorisnik(username.getText(), password.getText());
+						userForm();
+						loged = test.setKorisnikId(username.getText(), password.getText());
 					}
 				} catch (SQLException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 			}
-			
-			
+
 		});
 		register.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-				
+
 			}
-			
+
 		});
 		introForm.pack();
 		introForm.setVisible(true);

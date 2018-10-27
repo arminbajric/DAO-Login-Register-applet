@@ -124,55 +124,71 @@ public class KorisnikDaoImpl implements RegisterLoginInterface {
 		}
 		return userId;
 	}
-public JTable getTable(int userID) throws SQLException
-{
-	Connection con = ConManager.getInstance().getConnection();
-	String query="SELECT ime,prezime,grad,email,dob FROM imeniklist WHERE 'info.id'=?";
-	ResultSet rs=null;
-	
-	Object[] temp = new Object[] {"Ime","Prezime","Grad","Email","DOB"};
-	DefaultTableModel model=new DefaultTableModel(null,temp);
-	
-	JTable t;
-	try (PreparedStatement statement = con.prepareStatement(query);) {
 
-		statement.setInt(1, userID);
-		
-		rs = statement.executeQuery();
-		while(rs.next())
-		{
-			
-			 temp= new Object[] {rs.getString("ime"),rs.getString("prezime"),rs.getString("grad"),rs.getString("email"),rs.getString("dob")};
-			model.addRow(temp);
+	public JTable getTable(int userID) throws SQLException {
+		Connection con = ConManager.getInstance().getConnection();
+		String query = "SELECT ime,prezime,grad,email,dob FROM imeniklist WHERE 'info.id'=?";
+		ResultSet rs = null;
+
+		Object[] temp = new Object[] { "Ime", "Prezime", "Grad", "Email", "DOB" };
+		DefaultTableModel model = new DefaultTableModel(null, temp);
+
+		JTable t;
+		try (PreparedStatement statement = con.prepareStatement(query);) {
+
+			statement.setInt(1, userID);
+
+			rs = statement.executeQuery();
+			while (rs.next()) {
+
+				temp = new Object[] { rs.getString("ime"), rs.getString("prezime"), rs.getString("grad"),
+						rs.getString("email"), rs.getString("dob") };
+				model.addRow(temp);
+			}
+
+			t = new JTable();
+			t.setModel(model);
+
 		}
-		
-		 t = new JTable();
-		 t.setModel(model);
-	
+		return t;
 	}
-	return t;
-}
 
-@Override
-public Korisnik getKorisnik(String user, String pass) throws SQLException {
-	// TODO Auto-generated method stub
-	Connection con = ConManager.getInstance().getConnection();
-	Korisnik korisnik = null;
-	String upit = "SELECT * FROM INFO WHERE userName=? AND password=?";
-	ResultSet rs = null;
-	try (PreparedStatement statement = con.prepareStatement(upit);) {
+	@Override
+	public Korisnik getKorisnik(String user, String pass) throws SQLException {
+		// TODO Auto-generated method stub
+		Connection con = ConManager.getInstance().getConnection();
+		Korisnik korisnik = null;
+		String upit = "SELECT * FROM INFO WHERE userName=? AND password=?";
+		ResultSet rs = null;
+		try (PreparedStatement statement = con.prepareStatement(upit);) {
 
-		statement.setString(1, user);
-		statement.setString(2, pass);
-		rs = statement.executeQuery();
-		if (rs.next()) {
+			statement.setString(1, user);
+			statement.setString(2, pass);
+			rs = statement.executeQuery();
+			if (rs.next()) {
 
-			korisnik = new Korisnik(rs.getInt("id"), rs.getString("userName"), rs.getString("password"),
-					rs.getString("email"), rs.getString("dob"), rs.getString("gender"), rs.getString("country"),
-					rs.getInt("role"));
-			rs.close();
+				korisnik = new Korisnik(rs.getInt("id"), rs.getString("userName"), rs.getString("password"),
+						rs.getString("email"), rs.getString("dob"), rs.getString("gender"), rs.getString("country"),
+						rs.getInt("role"));
+				rs.close();
+			}
 		}
+		return korisnik;
 	}
-	return korisnik;
-}
+
+	@Override
+	public ResultSet getRs(int id) throws SQLException {
+		// TODO Auto-generated method stub
+		Connection con = ConManager.getInstance().getConnection();
+
+		String upit = "SELECT * FROM imeniklist WHERE id=?";
+		ResultSet rs = null;
+		try (PreparedStatement statement = con.prepareStatement(upit);) {
+
+			statement.setInt(1, id);
+			rs = statement.executeQuery();
+
+		}
+		return rs;
+	}
 }

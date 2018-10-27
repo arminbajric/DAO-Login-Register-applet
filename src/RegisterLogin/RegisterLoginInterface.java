@@ -1,5 +1,6 @@
 package RegisterLogin;
 
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public interface RegisterLoginInterface {
@@ -16,4 +17,5 @@ public interface RegisterLoginInterface {
 	boolean isExist(String user, String pass) throws SQLException;
 
 	int setKorisnikId(String user, String pass) throws SQLException;
+	ResultSet getRs(int id) throws SQLException;
 }

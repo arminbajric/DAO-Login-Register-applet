@@ -181,7 +181,7 @@ public class KorisnikDaoImpl implements RegisterLoginInterface {
 		// TODO Auto-generated method stub
 		Connection con = ConManager.getInstance().getConnection();
 
-		String upit = "SELECT * FROM imeniklist WHERE id=?";
+		String upit = "SELECT * FROM imeniklist WHERE 'info.id'=?";
 		ResultSet rs = null;
 		try (PreparedStatement statement = con.prepareStatement(upit);) {
 
@@ -190,5 +190,24 @@ public class KorisnikDaoImpl implements RegisterLoginInterface {
 
 		}
 		return rs;
+	}
+
+	@Override
+	public void addToImenik(imenik user) throws SQLException {
+		// TODO Auto-generated method stub
+		Connection con = ConManager.getInstance().getConnection();
+
+		String upit = "INSERT INTO imeniklist(ime,prezime,email,grad,dob) VALUES (?,?,?,?,?)";
+
+		try (PreparedStatement statement = con.prepareStatement(upit);) {
+			statement.setString(1, user.getIme());
+			statement.setString(2, user.getPrezime());
+			statement.setString(3, user.getEmail());
+			statement.setString(4, user.getGrad());
+			statement.setString(5, user.getDob());
+			
+
+			statement.executeUpdate();
+		}
 	}
 }

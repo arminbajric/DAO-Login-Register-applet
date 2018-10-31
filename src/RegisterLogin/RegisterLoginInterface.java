@@ -18,4 +18,5 @@ public interface RegisterLoginInterface {
 
 	int setKorisnikId(String user, String pass) throws SQLException;
 	ResultSet getRs(int id) throws SQLException;
+	void addToImenik(imenik user) throws SQLException;
 }
